@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+
+    <color name="deezer_black">#1A1C20</color>
+    <color name="deezer_teal">#018B89</color>
+    <color name="deezer_teal_variant">#0C957B</color>
+    <color name="deezer_green">#70B95B</color>
+    <color name="deezer_green_variant">#49AA62</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_color">#BCB9B9</color>
+
+    <color name="album_card_background">#141619</color>
+</resources>
