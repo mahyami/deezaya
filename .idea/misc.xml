@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/splash_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.12708333333333333" />
+        <entry key="app/src/main/res/layout/fragment_album_details.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/fragment_album_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item_album.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

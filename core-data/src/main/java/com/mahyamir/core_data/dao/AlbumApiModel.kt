@@ -1,4 +1,4 @@
-package com.mahyamir.core_data
+package com.mahyamir.core_data.dao
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,9 +19,4 @@ data class AlbumsData(
     @SerializedName("total")
     val totalCount: Int
     //TODO next prev
-)
-
-data class Artist(
-    @SerializedName("name")
-    val name: String
 )

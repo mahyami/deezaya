@@ -10,12 +10,22 @@
 
         <action
             android:id="@+id/actionAlbumDetails"
-            app:destination="@id/albumDetailsFragment" />
+            app:destination="@id/albumDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
 
     <fragment
         android:id="@+id/albumDetailsFragment"
-        android:name="com.mahyamir.deezaya.details.AlbumDetailsFragment" />
+        android:name="com.mahyamir.deezaya.details.AlbumDetailsFragment">
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
 
 </navigation>

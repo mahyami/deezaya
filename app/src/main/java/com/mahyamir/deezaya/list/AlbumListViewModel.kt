@@ -23,8 +23,8 @@ class AlbumListViewModel @Inject constructor(
     albumsRepository: AlbumsRepository
 ) : ViewModel() {
 
-    private var _albumUiState = MutableLiveData<AlbumListUiState>()
-    val albumUiState: LiveData<AlbumListUiState> = _albumUiState
+    private var _albumsUiState = MutableLiveData<AlbumListUiState>()
+    val albumsUiState: LiveData<AlbumListUiState> = _albumsUiState
     private var albumsDisposable: Disposable? = null
 
     init {
@@ -48,7 +48,7 @@ class AlbumListViewModel @Inject constructor(
                 coverUrl = model.coverUrl
             )
         }
-        _albumUiState.postValue(AlbumListUiState(albums))
+        _albumsUiState.postValue(AlbumListUiState(albums))
     }
 
     private fun onError(throwable: Throwable) {

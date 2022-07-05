@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mahyamir.deezaya.databinding.FragmentAlbumListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,7 @@ class AlbumListFragment : Fragment() {
 
     private val adapter = AlbumsAdapter(object : AlbumsAdapter.AlbumViewHolder.Callback {
         override fun onAlbumClick(id: String) {
+            findNavController().navigate(AlbumListFragmentDirections.actionAlbumDetails(id))
         }
     })
 
@@ -39,7 +41,7 @@ class AlbumListFragment : Fragment() {
         binding.albumsRecyclerView.layoutManager = GridLayoutManager(requireContext(), SPAN_COUNT)
         binding.albumsRecyclerView.adapter = adapter
 
-        viewModel.albumUiState.observe(viewLifecycleOwner, ::uiStateObserver)
+        viewModel.albumsUiState.observe(viewLifecycleOwner, ::uiStateObserver)
     }
 
     private fun uiStateObserver(uiState: AlbumListUiState) {
