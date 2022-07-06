@@ -10,14 +10,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mahyamir.deezaya.databinding.FragmentAlbumListBinding
+import com.mahyamir.deezaya.ui.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AlbumListFragment : Fragment() {
 
-    private var _binding: FragmentAlbumListBinding? = null
-    private val binding get() = requireNotNull(_binding)
+    private var binding by viewBinding<FragmentAlbumListBinding> {
+        it.albumsRecyclerView.adapter = null
+    }
 
     private val viewModel: AlbumListViewModel by viewModels()
 
@@ -32,7 +34,7 @@ class AlbumListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = FragmentAlbumListBinding.inflate(inflater, container, false).also {
-        _binding = it
+        binding = it
     }.root
 
 
@@ -48,11 +50,6 @@ class AlbumListFragment : Fragment() {
         lifecycleScope.launch {
             adapter.submitData(uiState.albums)
         }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     override fun onDestroy() {

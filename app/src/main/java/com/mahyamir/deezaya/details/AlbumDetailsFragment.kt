@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mahyamir.deezaya.databinding.FragmentAlbumDetailsBinding
+import com.mahyamir.deezaya.ui.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AlbumDetailsFragment : Fragment() {
 
-    private var _binding: FragmentAlbumDetailsBinding? = null
-    private val binding get() = requireNotNull(_binding)
+    private var binding by viewBinding<FragmentAlbumDetailsBinding>()
     private val viewModel: AlbumDetailsViewModel by viewModels()
     private val albumId by lazy { AlbumDetailsFragmentArgs.fromBundle(requireArguments()).id }
 
@@ -22,7 +22,7 @@ class AlbumDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = FragmentAlbumDetailsBinding.inflate(inflater, container, false).also {
-        _binding = it
+        binding = it
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
