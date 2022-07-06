@@ -1,4 +1,4 @@
-package com.mahyamir.core_data
+package com.mahyamir.core_data.api
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

@@ -1,8 +1,7 @@
-package com.mahyamir.core_data
+package com.mahyamir.core_data.api
 
 import com.mahyamir.core_data.dao.AlbumDetailsApiModel
 import com.mahyamir.core_data.dao.AlbumsData
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

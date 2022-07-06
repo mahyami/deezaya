@@ -3,8 +3,8 @@ package com.mahyamir.core_data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.rxjava3.cachedIn
 import androidx.paging.rxjava3.observable
+import com.mahyamir.core_data.api.DeezayaClient
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject

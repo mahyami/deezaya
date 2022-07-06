@@ -9,18 +9,18 @@ import androidx.paging.map
 import androidx.paging.rxjava3.cachedIn
 import com.mahyamir.core_data.AlbumDomainModel
 import com.mahyamir.core_data.AlbumsRepository
+import com.mahyamir.deezaya.scheduler.SchedulerProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class AlbumListViewModel @Inject constructor(
-    albumsRepository: AlbumsRepository
+    albumsRepository: AlbumsRepository,
+    schedulerProvider: SchedulerProvider
 ) : ViewModel() {
 
     private var _albumsUiState = MutableLiveData<AlbumListUiState>()
@@ -31,8 +31,8 @@ class AlbumListViewModel @Inject constructor(
         albumsDisposable = albumsRepository.getAlbums()
                 // important for rotations
             .cachedIn(viewModelScope)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(schedulerProvider.ioScheduler)
+            .observeOn(schedulerProvider.mainScheduler)
             .subscribeBy(
                 onNext = ::onNextPageAlbums,
                 onError = ::onError
