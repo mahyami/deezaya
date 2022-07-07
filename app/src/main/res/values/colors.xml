@@ -10,5 +10,6 @@
     <color name="white">#FFFFFF</color>
     <color name="text_color">#BCB9B9</color>
 
+    <color name="album_details_background">#202227</color>
     <color name="album_card_background">#141619</color>
 </resources>

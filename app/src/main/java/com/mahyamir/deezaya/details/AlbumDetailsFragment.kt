@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahyamir.core_data.AlbumDetailsDomainModel
 import com.mahyamir.deezaya.R
@@ -42,15 +43,30 @@ class AlbumDetailsFragment : Fragment() {
 
         binding.tracksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.tracksRecyclerView.adapter = tracksAdapter
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
-    private fun uiStateObserver(state: AlbumDetailsUiState) = when (state) {
-        is AlbumDetailsUiState.Loaded -> {
-            fillView(state.details)
+    private fun uiStateObserver(state: AlbumDetailsUiState) {
+        when (state) {
+            is AlbumDetailsUiState.Loaded -> {
+                setLayoutVisibility(state)
+                fillView(state.details)
+            }
+            is AlbumDetailsUiState.Error -> {
+                setLayoutVisibility(state)
+            }
+            is AlbumDetailsUiState.Loading -> {
+                setLayoutVisibility(state)
+            }
         }
-        is AlbumDetailsUiState.Error -> {
-            Toast.makeText(requireContext(), "Something went wrong ", Toast.LENGTH_LONG).show()
-        }
+    }
+
+    private fun setLayoutVisibility(state: AlbumDetailsUiState) {
+        binding.detailsLayout.isVisible = state is AlbumDetailsUiState.Loaded
+        binding.errorLayout.isVisible = state is AlbumDetailsUiState.Error
+        binding.progressBar.isVisible = state is AlbumDetailsUiState.Loading
     }
 
     private fun fillView(details: AlbumDetailsDomainModel) {
@@ -67,11 +83,13 @@ class AlbumDetailsFragment : Fragment() {
             releasedOnText.text = "Released on ${details.releaseDate}"
             tracksAdapter.submitList(details.tracks)
             binding.shareButton.setOnClickListener {
-                val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipboard =
+                    requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText("label", details.share)
                 clipboard.setPrimaryClip(clip)
 
-                Toast.makeText(requireContext(), "Link copied to clipboard!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Link copied to clipboard!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

@@ -23,6 +23,7 @@ class AlbumDetailsViewModel @Inject constructor(
 
     init {
         val albumId = requireNotNull(savedStateHandle.get<String>("id"))
+        _albumUiState.postValue(AlbumDetailsUiState.Loading)
         albumsRepository.getAlbum(albumId)
             .subscribeOn(schedulerProvider.ioScheduler)
             .observeOn(schedulerProvider.mainScheduler)
