@@ -14,8 +14,19 @@ class AlbumDetailsConverter @Inject constructor() {
             isExplicit = apiModel.isExplicit,
             share = apiModel.share,
             artistName = apiModel.artist.name,
-            genres = apiModel.genreData.data.map { it.name },
-            tracks = apiModel.tracksData.data.map { Track(name = it.title, link = it.link) },
+            tracks = apiModel.tracksData.data.map {
+                Track(
+                    name = it.title,
+                    link = it.link,
+                    coverUrl = createGenerateCoverUrl(it.imageId)
+                )
+            },
         )
+    }
+
+    private fun createGenerateCoverUrl(id: String?): String? {
+        return id?.let {
+            "https://e-cdn-images.dzcdn.net/images/cover/$it/120x120-000000-80-0-0.jpg"
+        }
     }
 }

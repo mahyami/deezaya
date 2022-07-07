@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.mahyamir.deezaya.R
 import com.mahyamir.deezaya.databinding.ListItemAlbumBinding
+import com.mahyamir.deezaya.ui.loadImage
 
 class AlbumsAdapter(private val callback: AlbumViewHolder.Callback) :
     PagingDataAdapter<Album, AlbumsAdapter.AlbumViewHolder>(AlbumsDiffCallback()) {
@@ -43,20 +42,17 @@ class AlbumsAdapter(private val callback: AlbumViewHolder.Callback) :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Album) {
-            // TODO image loader and press effect
             itemView.setOnClickListener { callback.onAlbumClick(album.id) }
             binding.apply {
-                artistText.text = album.artistName
+                artistText.text = "By ${album.artistName}"
                 titleText.text = album.name
             }
             binding.coverImage.clipToOutline = true
-            // TODO create glide loader class
-            Glide.with(itemView.context)
-                .load(album.coverUrl)
-                .centerCrop()
-                .placeholder(R.drawable.album_placeholder)
-                .transition(DrawableTransitionOptions.withCrossFade(500))
-                .into(binding.coverImage)
+            loadImage(
+                binding.coverImage,
+                url = album.coverUrl,
+                placeholder = R.drawable.album_placeholder
+            )
         }
 
         interface Callback {

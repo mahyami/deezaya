@@ -29,7 +29,7 @@ class AlbumListViewModel @Inject constructor(
 
     init {
         albumsDisposable = albumsRepository.getAlbums()
-                // important for rotations
+            // important for rotations
             .cachedIn(viewModelScope)
             .subscribeOn(schedulerProvider.ioScheduler)
             .observeOn(schedulerProvider.mainScheduler)

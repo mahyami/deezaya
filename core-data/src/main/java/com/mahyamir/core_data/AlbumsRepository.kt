@@ -8,7 +8,9 @@ import com.mahyamir.core_data.api.DeezayaClient
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AlbumsRepository @Inject constructor(
     private val albumsPagingSource: AlbumsPagingSource,
     private val deezayaClient: DeezayaClient,

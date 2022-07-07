@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">deezaya</string>
     <string name="albums_title">Albums</string>
+    <string name="tracks_title">Tracks</string>
 </resources>

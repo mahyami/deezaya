@@ -1,6 +1,8 @@
 package com.mahyamir.core_data.api
 
 import com.google.gson.GsonBuilder
+import com.mahyamir.core_data.dao.AlbumDetailsApiModel
+import io.reactivex.rxjava3.core.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,6 +39,12 @@ class DeezayaClient @Inject constructor() {
 
     fun getAlbums(index: Int) = deezayaService.getAlbums(index)
 
-    fun getAlbum(id: String) = deezayaService.getAlbum(id)
+    fun getAlbum(id: String): Single<AlbumDetailsApiModel> = deezayaService.getAlbum(id).flatMap {
+        if (it.error != null) {
+            Single.error(Throwable(it.error.message))
+        } else {
+            Single.just(it)
+        }
+    }
 }
 

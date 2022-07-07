@@ -17,20 +17,10 @@ data class AlbumDetailsApiModel(
     val share: String,
     @SerializedName("artist")
     val artist: Artist,
-    @SerializedName("genres")
-    val genreData: GenreData,
     @SerializedName("tracks")
-    val tracksData: TracksData
-)
-
-data class GenreData(
-    @SerializedName("data")
-    val data: List<Genre>
-)
-
-data class Genre(
-    @SerializedName("name")
-    val name: String
+    val tracksData: TracksData,
+    @SerializedName("error")
+    val error: Error?
 )
 
 data class TracksData(
@@ -42,5 +32,12 @@ data class Track(
     @SerializedName("title")
     val title: String,
     @SerializedName("link")
-    val link: String
+    val link: String,
+    @SerializedName("md5_image")
+    val imageId: String?
+)
+
+data class Error(
+    @SerializedName("message")
+    val message: String?
 )
