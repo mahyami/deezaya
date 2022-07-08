@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -46,10 +47,25 @@ class AlbumListFragment : Fragment() {
         viewModel.albumsUiState.observe(viewLifecycleOwner, ::uiStateObserver)
     }
 
-    private fun uiStateObserver(uiState: AlbumListUiState) {
-        lifecycleScope.launch {
-            adapter.submitData(uiState.albums)
+    private fun uiStateObserver(uiState: AlbumListUiState) = when (uiState) {
+        is AlbumListUiState.Loaded -> {
+            lifecycleScope.launch {
+                adapter.submitData(uiState.albums)
+            }
+            setLayoutVisibility(uiState)
         }
+        is AlbumListUiState.Loading -> {
+            setLayoutVisibility(uiState)
+        }
+        is AlbumListUiState.Error -> {
+            setLayoutVisibility(uiState)
+        }
+    }
+
+    private fun setLayoutVisibility(state: AlbumListUiState) {
+        binding.albumsRecyclerView.isVisible = state is AlbumListUiState.Loaded
+        binding.errorIncluded.errorLayout.isVisible = state is AlbumListUiState.Error
+        binding.progressBar.isVisible = state is AlbumListUiState.Loading
     }
 
     override fun onDestroy() {

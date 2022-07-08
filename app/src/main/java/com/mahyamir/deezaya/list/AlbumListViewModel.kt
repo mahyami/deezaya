@@ -1,5 +1,6 @@
 package com.mahyamir.deezaya.list
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,8 +29,9 @@ class AlbumListViewModel @Inject constructor(
     private var albumsDisposable: Disposable? = null
 
     init {
+        _albumsUiState.postValue(AlbumListUiState.Loading)
         albumsDisposable = albumsRepository.getAlbums()
-            // important for rotations
+            // important for config change
             .cachedIn(viewModelScope)
             .subscribeOn(schedulerProvider.ioScheduler)
             .observeOn(schedulerProvider.mainScheduler)
@@ -48,11 +50,12 @@ class AlbumListViewModel @Inject constructor(
                 coverUrl = model.coverUrl
             )
         }
-        _albumsUiState.postValue(AlbumListUiState(albums))
+        _albumsUiState.postValue(AlbumListUiState.Loaded(albums))
     }
 
     private fun onError(throwable: Throwable) {
-        // TODO
+        Log.e("Error getting album details! ", "${throwable.message}")
+        _albumsUiState.postValue(AlbumListUiState.Error)
     }
 
     fun onDestroy() = albumsDisposable?.dispose()

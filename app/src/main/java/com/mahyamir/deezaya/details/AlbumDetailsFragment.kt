@@ -65,7 +65,7 @@ class AlbumDetailsFragment : Fragment() {
 
     private fun setLayoutVisibility(state: AlbumDetailsUiState) {
         binding.detailsLayout.isVisible = state is AlbumDetailsUiState.Loaded
-        binding.errorLayout.isVisible = state is AlbumDetailsUiState.Error
+        binding.errorIncluded.errorLayout.isVisible = state is AlbumDetailsUiState.Error
         binding.progressBar.isVisible = state is AlbumDetailsUiState.Loading
     }
 
@@ -78,17 +78,17 @@ class AlbumDetailsFragment : Fragment() {
                 placeholder = R.drawable.album_placeholder
             )
             titleText.text = details.title
-            artistText.text = "By ${details.artistName}"
+            artistText.text = getString(R.string.by_artist).format(details.artistName)
             explicitImage.isVisible = details.isExplicit
-            releasedOnText.text = "Released on ${details.releaseDate}"
+            releasedOnText.text = getString(R.string.released_on).format(details.releaseDate)
             tracksAdapter.submitList(details.tracks)
             binding.shareButton.setOnClickListener {
                 val clipboard =
                     requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip = ClipData.newPlainText("label", details.share)
+                val clip = ClipData.newPlainText(SHARE_BUTTON_LABEL, details.share)
                 clipboard.setPrimaryClip(clip)
 
-                Toast.makeText(requireContext(), "Link copied to clipboard!", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.copied_to_clipboard, Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -97,5 +97,9 @@ class AlbumDetailsFragment : Fragment() {
     override fun onDestroy() {
         viewModel.onDestroy()
         super.onDestroy()
+    }
+
+    companion object {
+        private const val SHARE_BUTTON_LABEL = "share_label"
     }
 }

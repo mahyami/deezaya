@@ -4,4 +4,7 @@
     <string name="tracks_title">Tracks</string>
     <string name="error_not_found_title">Oops… it did it again</string>
     <string name="error_not_found_message">The page you requested couldn\'t be found. \n\n Please contact Deezers\' backend team ;) </string>
+    <string name="copied_to_clipboard">Link copied to clipboard!</string>
+    <string name="released_on">Released on %s</string>
+    <string name="by_artist">By %s</string>
 </resources>

@@ -22,7 +22,7 @@ class AlbumDetailsViewModel @Inject constructor(
     private var disposable: Disposable? = null
 
     init {
-        val albumId = requireNotNull(savedStateHandle.get<String>("id"))
+        val albumId = requireNotNull(savedStateHandle.get<String>(ALBUM_ID_KEY))
         _albumUiState.postValue(AlbumDetailsUiState.Loading)
         albumsRepository.getAlbum(albumId)
             .subscribeOn(schedulerProvider.ioScheduler)
@@ -38,11 +38,15 @@ class AlbumDetailsViewModel @Inject constructor(
     }
 
     private fun onError(throwable: Throwable) {
-        Log.e("Error getting album details! ", "${throwable.message}")
+        Log.e("Error getting album details!", "${throwable.message}")
         _albumUiState.postValue(AlbumDetailsUiState.Error)
     }
 
     fun onDestroy() {
         disposable?.dispose()
+    }
+
+    companion object {
+        private const val ALBUM_ID_KEY = "id"
     }
 }
