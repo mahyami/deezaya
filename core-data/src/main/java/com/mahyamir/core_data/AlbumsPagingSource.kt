@@ -13,7 +13,6 @@ class AlbumsPagingSource @Inject constructor(
 ) : RxPagingSource<Int, AlbumDomainModel>() {
 
     override fun getRefreshKey(state: PagingState<Int, AlbumDomainModel>): Int? {
-        // TODO
         return null
     }
 
@@ -22,11 +21,11 @@ class AlbumsPagingSource @Inject constructor(
 
         return client.getAlbums(position)
             .subscribeOn(Schedulers.io())
-            .map { toLoadResult(it, position) }
+            .map { toLoadResult(it) }
             .onErrorReturn { LoadResult.Error(it) }
     }
 
-    private fun toLoadResult(data: AlbumsData, position: Int): LoadResult<Int, AlbumDomainModel> {
+    private fun toLoadResult(data: AlbumsData): LoadResult<Int, AlbumDomainModel> {
         return LoadResult.Page(
             data = data.albums.map {
                 AlbumDomainModel(
@@ -37,13 +36,17 @@ class AlbumsPagingSource @Inject constructor(
 
                 )
             },
-            // TODO improve last page is buggy
-            prevKey = if (position <= PAGE_SIZE) null else position - PAGE_SIZE,
-            nextKey = if (position + PAGE_SIZE >= data.totalCount) null else position + PAGE_SIZE
+            prevKey = extractIndexQueryValue(data.prevPage),
+            nextKey = extractIndexQueryValue(data.nextPage)
         )
     }
 
+    private fun extractIndexQueryValue(url: String?): Int? {
+        return url?.substringAfter(QUERY_INDEX)?.toInt()
+    }
+
     companion object {
+        const val QUERY_INDEX = "index="
         const val PAGE_SIZE = 20
     }
 }

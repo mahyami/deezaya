@@ -17,6 +17,9 @@ data class AlbumsData(
     @SerializedName("data")
     val albums: List<AlbumApiModel>,
     @SerializedName("total")
-    val totalCount: Int
-    //TODO next prev
+    val totalCount: Int,
+    @SerializedName("next")
+    val nextPage: String?,
+    @SerializedName("prev")
+    val prevPage: String?
 )
