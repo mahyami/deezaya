@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.paging.rxjava3.cachedIn
-import com.mahyamir.core_data.AlbumDomainModel
+import com.mahyamir.core_data.model.AlbumDomainModel
 import com.mahyamir.core_data.AlbumsRepository
 import com.mahyamir.deezaya.scheduler.SchedulerProvider
 import dagger.hilt.android.lifecycle.HiltViewModel

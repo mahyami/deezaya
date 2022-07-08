@@ -1,6 +1,8 @@
-package com.mahyamir.core_data
+package com.mahyamir.core_data.converter
 
 import com.mahyamir.core_data.dao.AlbumDetailsApiModel
+import com.mahyamir.core_data.model.AlbumDetailsDomainModel
+import com.mahyamir.core_data.model.Track
 import javax.inject.Inject
 
 class AlbumDetailsConverter @Inject constructor() {

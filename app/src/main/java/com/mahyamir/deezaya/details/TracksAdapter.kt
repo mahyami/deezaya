@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mahyamir.core_data.Track
+import com.mahyamir.core_data.model.Track
 import com.mahyamir.deezaya.R
 import com.mahyamir.deezaya.databinding.ListItemTrackBinding
 import com.mahyamir.deezaya.ui.loadImage

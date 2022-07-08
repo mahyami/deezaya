@@ -2,7 +2,7 @@ package com.mahyamir.deezaya.details
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.mahyamir.core_data.AlbumDetailsDomainModel
+import com.mahyamir.core_data.model.AlbumDetailsDomainModel
 import com.mahyamir.core_data.AlbumsRepository
 import com.mahyamir.deezaya.scheduler.SchedulerProvider
 import dagger.hilt.android.lifecycle.HiltViewModel

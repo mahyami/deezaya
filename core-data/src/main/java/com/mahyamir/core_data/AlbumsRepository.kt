@@ -5,6 +5,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.observable
 import com.mahyamir.core_data.api.DeezayaClient
+import com.mahyamir.core_data.converter.AlbumDetailsConverter
+import com.mahyamir.core_data.model.AlbumDetailsDomainModel
+import com.mahyamir.core_data.model.AlbumDomainModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject

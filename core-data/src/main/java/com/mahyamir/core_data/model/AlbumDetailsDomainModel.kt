@@ -1,4 +1,4 @@
-package com.mahyamir.core_data
+package com.mahyamir.core_data.model
 
 data class AlbumDetailsDomainModel(
     val id: String,
