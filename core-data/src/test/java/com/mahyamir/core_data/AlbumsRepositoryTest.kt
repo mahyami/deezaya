@@ -72,7 +72,7 @@ class AlbumsRepositoryTest {
     }
 
     @Test
-    fun `GIVEN album id WHEN getAlbum THEN album details domain model`() {
+    fun `GIVEN album id and api returns success WHEN getAlbum THEN album details domain model`() {
         // GIVEN
         val albumDetailsDomainModel = AlbumDetailsDomainModel(
             id = EXAMPLE_ID,
@@ -93,6 +93,19 @@ class AlbumsRepositoryTest {
 
         // THEN
         testObserver.assertResult(albumDetailsDomainModel)
+    }
+
+    @Test
+    fun `GIVEN album id and api returns error WHEN getAlbum THEN error`() {
+        // GIVEN
+        val throwable = Throwable()
+        every { deezayaClient.getAlbum(EXAMPLE_ID) } returns Single.error(throwable)
+
+        // WHEN
+        val testObserver = repository.getAlbum(EXAMPLE_ID).test()
+
+        // THEN
+        testObserver.assertError(throwable)
     }
 
     companion object {
