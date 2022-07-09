@@ -13,8 +13,7 @@ Task 4: binding extraction <br />
 Task 5: Add back button and loader for details <br />
 Task 6: add loader for the list  and extract strings <br />
 Task 7: fix paging bug <br />
-
-> TODO: Unit tests
+Task 8: Add unit tests for albums repository <br />
 
 ### Improvements for the future: 
 - Add different build variants
