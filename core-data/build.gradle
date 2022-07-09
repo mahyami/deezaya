@@ -54,4 +54,5 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
     implementation "androidx.paging:paging-rxjava3:$rootProject.pagingVersion"
 
+    implementation "io.mockk:mockk:$rootProject.mockkVersion"
 }
